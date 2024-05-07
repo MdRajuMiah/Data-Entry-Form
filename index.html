@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Form Submit to Google Sheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container text-center">
+    <br>
+    <h1>Kurigram Polytechnic Institute</h1>
+    <br>
+    <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <form name="submit-to-google-sheet">
+          <div class="mb-3">
+            <input name="Name" type="text" class="form-control" placeholder="Full name" required>
+          </div>
+
+          <div class="mb-3">
+            <input name="Email" type="email" class="form-control" placeholder="Email" required>
+          </div>
+
+          <div class="mb-3">
+            <input name="Phone" type="number" class="form-control" placeholder="Phone">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwZ261K1-uFVLiNZ63YG1YfwrMaMlvVz490ITGghzdLyfnUkO5RxDfHiJZbrWe5jCk/exec'; // Replace 'Your URL will be here' with the URL of your Google Apps Script
+    const form = document.forms['submit-to-google-sheet'];
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message));
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
